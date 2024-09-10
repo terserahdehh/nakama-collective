@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+</head>
+<body>
+
+    <center>
+        <h1>{{ title }}</h1>
+        <i>{{ creator }}</i>
+    </center>
+
+    <table align="center">
+      <tr>
+        <td>
+          <img src="{{ main_image }}" alt="One Piece Picture" width="600">
+        </td>
+      </tr>
+    </table>
+
+    <center>
+        <h2>Best Seller</h2>
+        <h3>{{ best_seller }}</h3>
+        <img src="{{ best_seller_image }}" alt="Cosplay Luffy Hat" width="300">
+
+        <h2>Nakama's Collection</h2>
+        <ul>
+            {% for item in nakama_collection %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Limited Offer</h2>
+        <h3>{{ limited_offer }}</h3>
+        <img src="{{ limited_offer_image }}" alt="One Piece Roronoa Zoro Enma" width="300">
+    </center>
+
+</body>
+</html>
