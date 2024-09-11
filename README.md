@@ -8,7 +8,7 @@ With the repository set up, I proceeded to create a new Django application named
 
 2. Question : Create a diagram that contains the request client to a Django-based web application and the response it gives, and explain the relationship between urls.py, views.py, models.py, and the html file.
 
-Answer : ![Alt text](image.png)
+Answer : ![Alt text](image-1.png)
 
 3. Question : Explain the use of git in software development!
 
