@@ -65,3 +65,8 @@ I then created two new functions, show_xml_by_id and show_json_by_id, to return 
 ![Alt text](image-4.png)
 
 ASSIGNMENT 3
+1. What is the difference between HttpResponseRedirect() and redirect()?
+2. Explain how the MoodEntry model is linked with User!
+3. What is the difference between authentication and authorization, and what happens when a user logs in? Explain how Django implements these two concepts.
+4. How does Django remember logged-in users? Explain other uses of cookies and whether all cookies are safe to use.
+5. Explain how did you implement the checklist step-by-step (apart from following the tutorial).
