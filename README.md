@@ -65,8 +65,31 @@ I then created two new functions, show_xml_by_id and show_json_by_id, to return 
 ![Alt text](image-4.png)
 
 ASSIGNMENT 3
-1. What is the difference between HttpResponseRedirect() and redirect()?
-2. Explain how the MoodEntry model is linked with User!
-3. What is the difference between authentication and authorization, and what happens when a user logs in? Explain how Django implements these two concepts.
-4. How does Django remember logged-in users? Explain other uses of cookies and whether all cookies are safe to use.
-5. Explain how did you implement the checklist step-by-step (apart from following the tutorial).
+
+1. Question : What is the difference between HttpResponseRedirect() and redirect()?
+
+Answer : In Django, both HttpResponseRedirect() and redirect() are used to send users to a different page, but redirect() is more flexible. While HttpResponseRedirect() requires a specific URL, redirect() can work with URLs, page names (views), or even model objects. This makes redirect() easier to use and better for larger projects where you might not want to hardcode every URL. In most cases, it's the smarter choice because it handles more situations with less effort.
+
+2. Question : Explain how the MoodEntry model is linked with User!
+
+Answer : The NakamaEntry model is connected to the User model through a foreign key relationship. This means that each NakamaEntry, which represents a product, is tied to a specific user, allowing us to identify who created which product. In the Product model, the user field acts as a foreign key that references the User model. This setup allows multiple products to be associated with a single user while ensuring that each product is linked to only one user. When a user creates a new product, it automatically connects to their account, streamlining the management and display of user-specific information within the application.
+
+3. Question : What is the difference between authentication and authorization, and what happens when a user logs in? Explain how Django implements these two concepts.
+
+Answer : Authentication is about verifying who you are, while authorization is about controlling what you can do. When a user logs in, authentication checks if their username and password match to confirm their identity. After that, authorization determines what actions or areas of the site they are allowed to access, based on their permissions. In Django, authentication is handled with the login system, where users provide credentials, and Django verifies them. Authorization is handled through permissions and groups, which define what each user is allowed to do, like accessing certain views or modifying data.
+
+4. Question : How does Django remember logged-in users? Explain other uses of cookies and whether all cookies are safe to use.
+
+Answer : Django remembers logged in users through session cookies. When a user logs in, Django stores a special cookie in their browser that has a unique ID, which it uses to track their session and keep them logged in across pages. Cookies are small pieces of data stored in the browser, used for things like remembering login details, preferences, or tracking website activity.
+
+However, not all cookies are safe. Some can be used to track users without their consent or carry security risks if not handled correctly, like storing sensitive data. That’s why Django uses secure cookies for login sessions to help keep user information safe.
+
+5. Question : Explain how did you implement the checklist step-by-step (apart from following the tutorial).
+
+Answer : First, I opened the views.py file in the main subdirectory of my project and added imports for UserCreationForm and messages. Then, I included a register function that automatically generates a registration form and creates a user account when the form data is submitted. The function checks if the request is a POST request, validates the form, saves the user, and displays a success message once the account is created. Afterward, I added the form context and rendered the register.html file to display the form. Next, I created a new HTML file named register.html in the main/templates directory to handle the user registration view. I also opened urls.py, imported the register function, and added a URL path to urlpatterns so the registration function could be accessed.
+
+After setting up registration, I reopened views.py to add imports for authenticate, login, and AuthenticationForm. I then created the login_user function, which handles user authentication. Once the login.html file was created in the main/templates directory, I updated urls.py by importing login_user and adding the corresponding URL path to urlpatterns. Following that, I went back to views.py to import logout and added a logout_user function, which allows users to log out, clears their session, and redirects them to the login page. I updated the main.html file by adding a logout button using the {% url 'main:logout' %} syntax.
+
+Then I returned to urls.py, imported the logout_user function, and added its URL path to urlpatterns to enable logout functionality. Next, I reopened views.py to import login_required. I applied the @login_required(login_url='/login') decorator to the show_main function, ensuring that only authenticated users could access the main page. After that, I logged out of the Django application to test everything. Additionally, I imported HttpResponseRedirect, reverse, and datetime at the top of views.py and modified the login_user function to set a cookie named last_login after successful login attempts. Finally, I updated the logout_user function to delete the last_login cookie when users logged out. To complete everything, I updated main.html once again by adding a line of code to display the last login time after the logout button, allowing users to see their most recent login session.
+
+Once everything was set up, I refreshed the login page, successfully logged in, and confirmed that the last login information was being displayed on the main page. Next, I opened models.py, imported the User model from django.contrib.auth.models, and modified the model to include a ForeignKey relationship. Next, I updated the show_main function to filter so only those created by the logged-in user would be displayed. I also passed the username to the context for display on the main page. After completing the changes, I saved my work and ran the migration process using python manage.py makemigrations. As expected, I encountered an error due to the new user field. I selected option 1 to set a default value for the user field, assigning the user with ID 1 to all existing entries. Then, I ran python manage.py migrate to apply the changes. Finally, I prepared the project for production. I opened settings.py, imported os, and replaced the DEBUG variable with a more flexible setup. This configuration allows the project to toggle between development and production modes based on an environment variable, ensuring DEBUG is only enabled when necessary, making the project safer and ready for deployment.
