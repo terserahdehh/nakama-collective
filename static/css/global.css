@@ -9,12 +9,21 @@
     border-color: #b08a19;
     box-shadow: 0 0 0 3px #c6a330;
 }
+
 @keyframes shine {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
 }
+
 .animate-shine {
     background: linear-gradient(120deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3));
     background-size: 200% 100%;
     animation: shine 3s infinite;
+}
+
+/* New rule to apply 'contain' to all background images */
+body, nav, div, section, header, footer {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
