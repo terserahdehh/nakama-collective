@@ -154,14 +154,14 @@ if form.is_valid():
 
 Afterwards, I created a function to add a product with ajax. I added two following imports in views.py
 
-'''
+```
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-'''
+```
 
 Then I created a new function in views.py
 
-'''
+```
 @csrf_exempt
 @require_POST
 def add_product_ajax(request):
@@ -180,20 +180,20 @@ def add_product_ajax(request):
     new_product.save()
 
     return HttpResponse(b"CREATED", status=201)
-'''
+```
 
 Next, I imported the function to urls.py and added the URL path inside of url patterns
 
-'''
+```
 from main.views import ....., add_product_ajax
-'''
+```
 
-'''
+```
 urlpatterns = [
     ...
     path('create-product-ajax', add_product_ajax, name='add_product_ajax'),
 ]
-'''
+```
 
 Then I modified the main.html by creating modal as a form to add a product and created a new function in the block <script> to add data product with ajax. To protect the application from Cross Site Scripting, I modified both views.py and forms.py by adding this following import
 
